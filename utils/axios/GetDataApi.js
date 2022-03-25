@@ -31,4 +31,4 @@ class GetDataApi {
   }
 }
 
-export default GetDataApi;
+export default new GetDataApi();
