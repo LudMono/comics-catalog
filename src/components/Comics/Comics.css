@@ -1,0 +1,40 @@
+.comics {
+}
+.comics__list {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.comics__item {
+
+}
+.item-card {
+  height: 450px;
+  padding: 20px 10px;
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  background: var(--secondary);
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+.item-card:hover {
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
+}
+
+.item-card__heading {
+  text-align: center;
+}
+.item-card__img {
+  height: 300px;
+}
+
+.item-card__img img {
+  width: 100%;
+  height: 100%;
+}

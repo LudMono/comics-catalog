@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constants/";
+import { BASE_URL } from "../constants/api";
 import md5 from "crypto-js/md5";
 
 class GetDataApi {
