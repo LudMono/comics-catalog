@@ -1,21 +1,21 @@
 import { END_POINTS, IMG_VARIANTS } from "../../../utils/constants/api";
 import getDataApi from "../../../utils/axios/GetDataApi";
-
 import { ROOT_INDEX } from "../../../utils/constants/dom";
+import characters from "../Characters/Characters";
 
 import "./Comics.css";
 
 class Comics {
   clickHander() {
-    const elements = document.querySelectorAll('.comics__item');
-    elements.forEach(el=> {
-      el.addEventListener('click', ()=> {
-        console.log(el.dataset.id);
-      })
-    })
+    const elements = document.querySelectorAll(".comics__item");
+    elements.forEach((el) => {
+      el.addEventListener("click", () => {
+        characters.render(el.dataset.id);
+      });
+    });
   }
   async render() {
-    const response = await getDataApi.getData(END_POINTS.comics);
+    const response = await getDataApi.getComics(END_POINTS.comics);
     const comics = response.data.data.results;
 
     const comicsList = comics.map(

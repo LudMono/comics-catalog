@@ -1,21 +1,22 @@
 import axios from "axios";
-import { BASE_URL } from "../constants/api";
+import { BASE_URL, END_POINTS } from "../constants/api";
 import md5 from "crypto-js/md5";
 
 class GetDataApi {
-  prepareUrl(endPoint) {
+  prepareAuthorization() {
     const timeStamp = Date.now();
     const privateKey = process.env.PRIVATE_KEY;
     const publicKey = process.env.PUBLIC_KEY;
 
     const hash = md5(timeStamp + privateKey + publicKey);
-    const url = `${BASE_URL}${endPoint}?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`;
+    const authorization = `?ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`;
 
-    return url;
+    return authorization;
   }
 
-  async getData(endPoint, limit = 100) {
-    const url = this.prepareUrl(endPoint);
+  async getComics(endPoint, limit = 100) {
+    const authorization = this.prepareAuthorization();
+    const url = `${BASE_URL}${endPoint}${authorization}`;
 
     try {
       const response = await axios.get(url, {
@@ -23,6 +24,18 @@ class GetDataApi {
           limit,
         },
       });
+      return response;
+    } catch (error) {
+      console.error(error.message);
+      return false;
+    }
+  }
+
+  async getComicsCharacters(id) {
+    const authorization = this.prepareAuthorization();
+    const url = `${BASE_URL}${END_POINTS.comics}/${id}/${END_POINTS.characters}${authorization}`;
+    try {
+      const response = await axios.get(url);
       return response;
     } catch (error) {
       console.error(error.message);
